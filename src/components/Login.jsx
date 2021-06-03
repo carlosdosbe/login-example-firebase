@@ -4,23 +4,29 @@ const Login = () => {
 
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const [error, setError] = React.useState(null)
 
   const procesarDatos = (e) => {
     e.preventDefault()
     if(!email.trim()){
       console.log('Vacio email')
+      setError('Vacio email')
       return
     }
 
     if(!password.trim()){
       console.log('Vacio pass')
+      setError('Vacio pass')
       return
     }
 
     if(password.length < 6){
       console.log('Corto pass')
+      setError('Pass corto')
       return
     }
+
+    setError(null)
 
   }
 
@@ -31,6 +37,13 @@ const Login = () => {
       <div className="row justify-content-center">
         <div className="col-12 col-md-6 col-xl-4">
           <form onSubmit={procesarDatos}>
+            {
+              error && (
+                <div className="alert alert-danger">
+                  {error}
+                </div>
+              )
+            }
             <input 
               type="email" 
               name="" 

@@ -1,4 +1,5 @@
 import React from 'react'
+import {auth} from '../firebase'
 
 const Login = () => {
 
@@ -28,7 +29,22 @@ const Login = () => {
     }
 
     setError(null)
+    if(esRegistro){
+      registrar()
+    }
+
+    setError(null)
   }
+
+  const registrar = React.useCallback(async() => {
+    try{
+      const res = await auth.createUserWithEmailAndPassword(email, password)
+      console.log(res.user)
+    }catch(error){
+      console.log(error)
+      setError(error.message)
+    }
+  }, [email, password])
 
   return (
     <div className="mt-5">
@@ -50,8 +66,6 @@ const Login = () => {
             }
             <input 
               type="email" 
-              name="" 
-              id="" 
               placeholder="Email"
               className="form-control mb-2"
               onChange={e => setEmail(e.target.value)}
@@ -59,8 +73,6 @@ const Login = () => {
             />
             <input 
               type="password" 
-              name="" 
-              id="" 
               placeholder="Password"
               className="form-control mb-2"
               onChange={e => setPassword(e.target.value)}

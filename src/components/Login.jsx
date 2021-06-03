@@ -31,10 +31,21 @@ const Login = () => {
     setError(null)
     if(esRegistro){
       registrar()
+    }else{
+      login()
     }
 
     setError(null)
   }
+
+  const login = React.useCallback(async () => {
+    try{
+      const res = await auth.signInWithEmailAndPassword(email, password)
+      console.log(res.user)
+    }catch(error){
+      setError(error.message)
+    }
+  }, [email, password])
 
   const registrar = React.useCallback(async() => {
     try{

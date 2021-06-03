@@ -5,6 +5,7 @@ const Login = () => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [error, setError] = React.useState(null)
+  const [esRegistro, setEsRegistro] = React.useState(true)
 
   const procesarDatos = (e) => {
     e.preventDefault()
@@ -27,12 +28,15 @@ const Login = () => {
     }
 
     setError(null)
-
   }
 
   return (
     <div className="mt-5">
-      <h3 className="text-center">Registro</h3>
+      <h3 className="text-center">
+        {
+          esRegistro ? 'Registro' : 'Acceso'
+        }
+      </h3>
       <hr />
       <div className="row justify-content-center">
         <div className="col-12 col-md-6 col-xl-4">
@@ -63,11 +67,19 @@ const Login = () => {
               value={password}
             />
             <div className="d-grid my-2">
-              <button className="btn btn-dark btn-lg btn-block mb-3">
-                Registrarse
+              <button className="btn btn-dark btn-lg btn-block mb-3" type="submit">
+              {
+                  esRegistro ? 'Registrarse' : 'Acceso'
+                }
               </button>
-              <button className="btn btn-info btn-sm btn-block">
-                Acceder
+              <button 
+                className="btn btn-info btn-sm btn-block"
+                type="button"
+                onClick={() => setEsRegistro(!esRegistro)}
+              >
+                {
+                  esRegistro ? 'Acceso' : 'Registro'
+                }
               </button>
             </div>
           </form>

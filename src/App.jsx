@@ -4,9 +4,24 @@ import Admin from './components/Admin'
 import Login from './components/Login'
 import Navbar from './components/Navbar'
 
+import {auth} from './firebase'
+
 function App() {
-  return (
-      
+  
+  const [firebaseUser, setFirebaseUser] = React.useState(false)
+
+  React.useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      console.log(user)
+      if(user){
+        setFirebaseUser(user)
+      }else{
+        setFirebaseUser(null)
+      }
+    })
+  }, [])
+  
+  return firebaseUser !== false ? (      
     <Router>
     
       <div className="container">
@@ -34,7 +49,9 @@ function App() {
       </div>
     </Router>
 
-  );
+  ) : (
+    <p>Cargando...</p>
+  )
 }
 
 export default App;

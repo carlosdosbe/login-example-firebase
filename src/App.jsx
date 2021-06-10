@@ -1,5 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import Admin from './components/Admin'
 import Login from './components/Login'
 import Navbar from './components/Navbar'
 
@@ -24,10 +25,10 @@ function App() {
             <Login/>
           </Route>
           <Route path="/admin">
-            admin
+            <Admin/>
           </Route>
           <Route path="/">
-            index
+            inicio
           </Route>
         </Switch>
       </div>

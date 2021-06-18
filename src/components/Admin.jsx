@@ -14,11 +14,16 @@ const Admin = (props) => {
       console.log('no existe')
       props.history.push('/login')
     }
-  }, [])
+  }, [props.history])
 
   return (
     <div>
       <h2>Protegida</h2>
+      {
+        user && (
+          <h3>{user.email}</h3>
+        )
+      }
     </div>
   )
 }
